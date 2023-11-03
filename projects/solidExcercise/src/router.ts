@@ -1,11 +1,15 @@
 import { Router } from 'express'
+import { PokemonController } from './pokemonInfo/controllers/PokemonController'
+import { PokemonInfoHandler } from './pokemonInfo/handlers/PokemonInfoHandler'
+import { PokemonRequester } from './pokemonInfo/requesters/PokemonRequester'
 
 const InfoRouter = Router()
 
 InfoRouter.get('/info/:id', (httpRequest, httpResponse) => {
-  const pokemonId = parseInt(httpRequest.params.id)
-
-  httpResponse.send({ success: true, pokemonId })
+  new PokemonController(new PokemonInfoHandler(new PokemonRequester()))
+    .getInfo(httpRequest.params)
+    .then(response => httpResponse.send(response))
+    .catch(e => console.log(e))
 })
 
 
