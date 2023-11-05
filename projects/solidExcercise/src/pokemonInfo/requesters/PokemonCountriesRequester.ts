@@ -8,9 +8,12 @@ export class PokemonCountriesRequester implements PokemonCountriesRepository {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const families_id = await this.getFamilies_id(id)
     const query = `SELECT z.country_code
-      FROM family_zone fz 
-      JOIN zone z ON fz.zone_id = z.id 
-      WHERE fz.family_id IN (${families_id}) ORDER BY fz.probability DESC LIMIT 3`
+    FROM family_zone fz 
+    JOIN zone z ON fz.zone_id = z.id 
+    WHERE fz.family_id IN (${families_id}) 
+    GROUP BY z.country_code
+    ORDER BY MAX(fz.probability) DESC LIMIT 3`
+    /*  */
 
     const results = await runQuery(query).then(response => response.results)
 
