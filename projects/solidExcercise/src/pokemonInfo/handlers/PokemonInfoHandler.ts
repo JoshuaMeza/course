@@ -3,13 +3,19 @@ import { mapToPokemonDto } from '../utils/mapToPokemonDataDto'
 import any = jasmine.any;
 
 export class PokemonInfoHandler extends PokemonInfoService {
+
+  public async getFamily(id: number) {
+    return this.getPokemonFamilyRepository().getFamilies(id)
+  }
+
   public async getInfo(id: number) {
     const getAllResponse = await this.getPokemonRepository().getAll(id)
     const filterMovesInformation = this.filterMoves(getAllResponse)
     const baseInformation = this.getBaseInformation(filterMovesInformation)
+    const family = await this.getFamily(id)
 
     return {
-      baseInformation
+      family, baseInformation
     }
   }
 
