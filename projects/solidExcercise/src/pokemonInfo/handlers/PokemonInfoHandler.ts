@@ -12,10 +12,10 @@ export class PokemonInfoHandler extends PokemonInfoService {
     const getAllResponse = await this.getPokemonRepository().getAll(id)
     const filterMovesInformation = this.filterMoves(getAllResponse)
     const baseInformation = this.getBaseInformation(filterMovesInformation)
-    const family = await this.getFamily(id)
+    const families = await this.getFamily(id)
 
     return {
-      family, baseInformation
+      families, baseInformation
     }
   }
 
