@@ -2,11 +2,12 @@ import { Router } from 'express'
 import { PokemonController } from './pokemonInfo/controllers/PokemonController'
 import { PokemonInfoHandler } from './pokemonInfo/handlers/PokemonInfoHandler'
 import { PokemonRequester } from './pokemonInfo/requesters/PokemonRequester'
+import { PokemonFamilyRequester } from './pokemonInfo/requesters/PokemonFamilyRequester'
 
 const InfoRouter = Router()
 
 InfoRouter.get('/info/:id', (httpRequest, httpResponse) => {
-  new PokemonController(new PokemonInfoHandler(new PokemonRequester()))
+  new PokemonController(new PokemonInfoHandler(new PokemonRequester(), new PokemonFamilyRequester()))
     .getInfo(httpRequest.params)
     .then(response => httpResponse.send(response))
     .catch(e => console.log(e))
