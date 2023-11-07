@@ -5,9 +5,8 @@ import { PokemonCountriesRepository } from '../repositories/PokemonCountriesRepo
 
 export class PokemonCountriesRequester implements PokemonCountriesRepository {
 
-  public async getCountries(id: number) {
+  public async getCountries(id: number, families_id: any) {
 
-    const families_id = await this.getFamilies_id(id)
     const query = `SELECT z.country_code
     FROM family_zone fz 
     JOIN zone z ON fz.zone_id = z.id 
@@ -18,17 +17,6 @@ export class PokemonCountriesRequester implements PokemonCountriesRepository {
     const countryCodes = results.map(result => result.country_code)
 
     return countryCodes
-  }
-
-
-  public async getFamilies_id(id: number) {
-
-    const query = `SELECT family_id FROM pokedb.family_pokemon WHERE pokemon_id = ${id}`
-    const results = await runQuery(query).then(response => response.results)
-    const familyIds = results.map(result => result.family_id)
-
-    return familyIds
-
   }
 
 
