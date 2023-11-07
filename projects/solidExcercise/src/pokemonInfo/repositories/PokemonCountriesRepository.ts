@@ -1,4 +1,4 @@
 export interface PokemonCountriesRepository {
-  getCountries: (id: number) => any
+  getCountries: (id: number, families_id: any) => any
 }
 

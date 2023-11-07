@@ -7,20 +7,17 @@ export class PokemonInfoHandler extends PokemonInfoService {
     return this.getPokemonFamilyRepository().getFamilies(id)
   }
 
-  public async getCountries(id: number) {
-    return this.getPokemonCountriesRepository().getCountries(id)
-  }
 
   public async getInfo(id: number) {
     const getAllResponse = await this.getPokemonRepository().getAll(id)
     const filterMovesInformation = this.filterMoves(getAllResponse)
     const baseInformation = this.getBaseInformation(filterMovesInformation)
-    const families = await this.getFamily(id)
-    const countries = await this.getCountries(id)
+    /* const families = await this.getFamily(id) */
 
-    return {
-      families, countries, baseInformation
-    }
+    return baseInformation
+    /* return {
+      families, baseInformation
+    } */
   }
 
   private filterMoves(pokemon: any) {
