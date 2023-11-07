@@ -1,6 +1,5 @@
 import { PokemonInfoService } from '../services/PokemonInfoService'
 import { mapToPokemonDto } from '../utils/mapToPokemonDataDto'
-import any = jasmine.any
 
 export class PokemonInfoHandler extends PokemonInfoService {
 

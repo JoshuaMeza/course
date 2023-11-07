@@ -20,7 +20,4 @@ export class PokemonFamilyRequester implements PokemonFamilyRepository {
     const familyIds = results.map(result => result.family_id)
     return familyIds
   }
-
-
-
 }
