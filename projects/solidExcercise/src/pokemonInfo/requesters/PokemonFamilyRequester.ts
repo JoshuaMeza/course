@@ -8,7 +8,9 @@ export class PokemonFamilyRequester implements PokemonFamilyRepository {
 
   private async getPokemonFamilies(id: number) {
     const query = `SELECT f.* FROM family f JOIN family_pokemon fp ON f.id = fp.family_id WHERE fp.pokemon_id = ${id};`
-    return await runQuery(query).then(response => response.results)
+    const results = await runQuery(query).then(response => response.results)
+    const families = results.map(result => result.name)
+    return families
   }
 
   public async getFamilies_id(id: number) {
